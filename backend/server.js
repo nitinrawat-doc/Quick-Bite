@@ -18,7 +18,8 @@ const PORT = process.env.PORT || 5000;
 
 const mongoose = require('mongoose');
 
-// ─── Connect to MongoDB ──────────────────────────────────────────────────────
+// ─── Connect to MongoDB 
+// ──────────────────────────────────────────────────────
 if (process.env.NODE_ENV !== 'test') {
   connectDB();
 }
