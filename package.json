@@ -1,0 +1,20 @@
+{
+  "name": "quickbite",
+  "version": "1.0.0",
+  "description": "QuickBite — Campus Canteen Online Ordering System",
+  "private": true,
+  "scripts": {
+    "dev:backend":     "cd backend && npm run dev",
+    "dev:frontend":    "cd frontend && npm run dev",
+    "seed":            "cd backend && npm run seed",
+    "setup:admin":     "cd backend && npm run setup:admin",
+    "test":            "cd backend && npm test",
+    "build:frontend":  "cd frontend && npm run build",
+    "build":           "npm run build:frontend",
+    "start":           "cd backend && npm start",
+    "install:all":     "cd backend && npm install && cd ../frontend && npm install"
+  },
+  "keywords": ["quickbite", "campus", "canteen", "mern"],
+  "author": "",
+  "license": "ISC"
+}

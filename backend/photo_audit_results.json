@@ -1,0 +1,824 @@
+{
+  "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80": {
+    "photoId": "1568901346375-23c9450c58cd",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Classic Smash Burger",
+        "category": "6aca6be285bebae47ddb3844",
+        "desc": "Double smash patty with American cheese, pickles, caramelised onions and special QB sauce on a brioche bun."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1586816001966-79b736744398?w=600&q=80": {
+    "photoId": "1586816001966-79b736744398",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Crispy Chicken Burger",
+        "category": "6aca6be285bebae47ddb3844",
+        "desc": "Buttermilk-marinated crispy chicken thigh with coleslaw, jalapeños and chipotle mayo."
+      }
+    ]
+  },
+  "/images/hero-burger-crispy.jpg": {
+    "title": "Local image",
+    "items": [
+      {
+        "name": "Veg Aloo Tikki Burger",
+        "category": "6aca6be285bebae47ddb3844",
+        "desc": "Spiced potato patty with mint chutney, onion rings and tomato in a soft sesame bun."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&q=80": {
+    "photoId": "1574071318508-1cdbab80d002",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Margherita Classic",
+        "category": "6aca6be285bebae47ddb3845",
+        "desc": "San Marzano tomato base, fresh mozzarella, hand-torn basil and extra-virgin olive oil."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&q=80": {
+    "photoId": "1513104890138-7c749659a591",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Paneer Tikka Pizza",
+        "category": "6aca6be285bebae47ddb3845",
+        "desc": "Tandoori-spiced paneer, colorful peppers and a creamy tikka sauce base."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80": {
+    "photoId": "1565299624946-b28f40a0ae38",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Peri-Peri Chicken Pizza",
+        "category": "6aca6be285bebae47ddb3845",
+        "desc": "Spicy peri-peri chicken strips, capsicum, red onion and mozzarella on a garlic butter base."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1528735602780-2552fd46c7af",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Bombay Masala Toast",
+        "category": "6aca6be285bebae47ddb3846",
+        "desc": "Spiced potato filling with green chutney, cheese and crunchy sev on toasted bread."
+      },
+      {
+        "name": "Grilled Club Sandwich",
+        "category": "6aca6be285bebae47ddb3846",
+        "desc": "Triple-decker with grilled chicken, bacon strips, egg, lettuce, tomato and mayo."
+      },
+      {
+        "name": "Cheese Sandwich",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "Golden butter-grilled sandwich stuffed with melting mozzarella-cheddar blend, herbs and capsicum."
+      },
+      {
+        "name": "Grilled Sandwich",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "Crisp buttery toasted sandwich with spiced vegetable filling, potatoes and cheese spread."
+      },
+      {
+        "name": "Paneer Sandwich",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "Grilled sandwich packed with tandoori spiced paneer cubes, onion rings and creamy green mayo."
+      },
+      {
+        "name": "Veg Sandwich",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "Classic double-slice sandwich filled with fresh cucumber, tomato, onion and tangy green mint chutney."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&q=80": {
+    "photoId": "1599487488170-d11ec9c172f0",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Fried Chicken Momos",
+        "category": "6aca6be285bebae47ddb3847",
+        "desc": "Pan-fried juicy chicken momos tossed in a fiery chilli-garlic sauce."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=600&q=80": {
+    "photoId": "1534422298391-e4f8c172dddb",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Steamed Veg Momos",
+        "category": "6aca6be285bebae47ddb3847",
+        "desc": "Silky steamed dumplings filled with spiced cabbage, carrot and tofu. Served with red chilli chutney."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1585937421612-70a008356fbe",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Aloo Paratha with Curd",
+        "category": "6aca6be285bebae47ddb3848",
+        "desc": "2 stuffed aloo parathas served with a bowl of chilled creamy curd, Amul butter and spicy mixed pickle."
+      },
+      {
+        "name": "Aloo Paratha",
+        "category": "6acfa8a385bebae47dddff33",
+        "desc": "Spiced potato stuffed whole wheat paratha, pan-toasted with Amul butter and served with tangy mixed pickle."
+      },
+      {
+        "name": "Paneer Paratha",
+        "category": "6acfa8a385bebae47dddff33",
+        "desc": "Stuffed with freshly grated spiced paneer, green chillies and fresh herbs, served golden crisp with butter."
+      },
+      {
+        "name": "Plain Paratha",
+        "category": "6acfa8a385bebae47dddff33",
+        "desc": "Flaky layered whole-wheat tawa paratha served piping hot with mango pickle and butter."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=600&q=80": {
+    "photoId": "1588166524941-3bf61a9c41db",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Butter Chicken Rice Bowl",
+        "category": "6aca6be285bebae47ddb3848",
+        "desc": "Tender chicken in a rich tomato-butter-cream gravy served over steamed basmati rice."
+      },
+      {
+        "name": "Mix Veg with Roti",
+        "category": "6aca6be285bebae47ddb3848",
+        "desc": "Fresh medley of seasonal vegetables sautéed with dry Indian spices, served with 4 whole-wheat tawa rotis."
+      },
+      {
+        "name": "Paneer Butter Masala with Rice",
+        "category": "6aca6be285bebae47ddb3848",
+        "desc": "Soft cottage cheese cubes in silky tomato-cashew makhani gravy served with steamed fragrant basmati rice."
+      },
+      {
+        "name": "Seasonal Sabzi with Roti",
+        "category": "6aca6be285bebae47ddb3848",
+        "desc": "Daily campus canteen seasonal vegetable special served with 4 soft buttered whole-wheat rotis."
+      },
+      {
+        "name": "Shahi Paneer with Rice",
+        "category": "6aca6be285bebae47ddb3848",
+        "desc": "Royal preparation of soft paneer in fragrant sweet-and-nutty cream gravy served with basmati rice."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1626777552726-4a6b54c97e46",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Chole Bhature",
+        "category": "6aca6be285bebae47ddb3848",
+        "desc": "2 large puffy golden bhatures served with spicy pindi chole, pickled onions, fried green chilli and lemon."
+      },
+      {
+        "name": "Uttapam",
+        "category": "6acfa8a385bebae47dddff33",
+        "desc": "Thick savoury rice pancake topped with finely chopped onions, tomatoes, green chillies and fresh coriander."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1546833999-b9f581a1996d",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Chole Chawal",
+        "category": "6aca6be285bebae47ddb3848",
+        "desc": "Traditional Amritsari spiced chickpeas cooked in onion-tomato masala served with hot steamed basmati rice."
+      },
+      {
+        "name": "Dal Makhani with Rice",
+        "category": "6aca6be285bebae47ddb3848",
+        "desc": "Overnight slow-cooked black lentils simmered with butter and fresh cream, served with steamed basmati rice."
+      },
+      {
+        "name": "Dal Rice",
+        "category": "6aca6be285bebae47ddb3848",
+        "desc": "Homestyle yellow arhar dal tempered with cumin, garlic and ghee served with steamed rice and pickle."
+      },
+      {
+        "name": "Dal Roti",
+        "category": "6aca6be285bebae47ddb3848",
+        "desc": "Comforting homestyle yellow dal tadka served with 4 soft whole-wheat tawa rotis and onion salad."
+      },
+      {
+        "name": "Kadhi Chawal",
+        "category": "6aca6be285bebae47ddb3848",
+        "desc": "Tangy spiced yogurt and gram-flour kadhi with soft onion pakoras served with hot basmati rice."
+      },
+      {
+        "name": "Rajma Chawal",
+        "category": "6aca6be285bebae47ddb3848",
+        "desc": "Slow-simmered Punjabi red kidney beans in rich spiced tomato gravy served with fluffy steamed basmati rice."
+      },
+      {
+        "name": "Special Thali",
+        "category": "6aca6be285bebae47ddb3848",
+        "desc": "Premium canteen thali: Shahi Paneer, Dal Makhani, Veg Pulao, 4 Butter Rotis, Boondi Raita, Salad, Papad and Gulab Jamun."
+      },
+      {
+        "name": "Veg Thali",
+        "category": "6aca6be285bebae47ddb3848",
+        "desc": "Wholesome campus thali: Dal Tadka, Seasonal Sabzi, Steamed Basmati Rice, 3 Tawa Rotis, Salad and Pickle."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&q=80": {
+    "photoId": "1546833999-b9f581a1996d",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Dal Makhani Thali",
+        "category": "6aca6be285bebae47ddb3848",
+        "desc": "Slow-cooked black lentil dal with 3 rotis, steamed rice, salad and pickle."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1563379091339-03b21ab4a4f8",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Veg Biryani",
+        "category": "6aca6be285bebae47ddb3848",
+        "desc": "Layered dum biryani with marinated vegetables, aromatic saffron rice, fried onions and cooling cucumber raita."
+      },
+      {
+        "name": "Veg Pulao",
+        "category": "6aca6be285bebae47ddb3848",
+        "desc": "Fragrant long-grain basmati rice cooked with fresh seasonal vegetables, whole spices and mint."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1601050690597-df0568f70950",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Bread Pakora",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "Spiced potato mash sandwiched in bread, dipped in seasoned gram flour batter and deep-fried golden."
+      },
+      {
+        "name": "Samosa",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "Flaky, golden triangular pastry stuffed with spicy cumin-tempered potatoes and green peas."
+      },
+      {
+        "name": "Gulab Jamun",
+        "category": "6acfa8a485bebae47dddff35",
+        "desc": "2 warm, soft milk-solid dumplings soaked in aromatic green cardamom and rosewater sugar syrup."
+      },
+      {
+        "name": "Kheer",
+        "category": "6acfa8a485bebae47dddff35",
+        "desc": "Traditional slow-cooked fragrant rice pudding in sweetened whole milk, garnished with sliced almonds and pistachios."
+      },
+      {
+        "name": "Seasonal Sweet",
+        "category": "6acfa8a485bebae47dddff35",
+        "desc": "Daily campus canteen special Indian sweet (Hot Gajar Halwa in winters / Besan Ladoo / Fresh Jalebi)."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1550547660-d9450f859349",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Cheese Burger",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "Crispy veg patty topped with a melted cheddar slice, pickles, onion rings and creamy herb sauce."
+      },
+      {
+        "name": "Veg Burger",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "Crispy seasoned vegetable patty in a sesame brioche bun with lettuce, tomato and signature QB burger sauce."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1612927601601-6638404737ce?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1612927601601-6638404737ce",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Cheese Maggi",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "Hot masala Maggi topped with generous molten shredded processed cheddar cheese."
+      },
+      {
+        "name": "Masala Maggi",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "Maggi noodles tossed with extra roasted cumin, garam masala, sautéed onions, chillies and fresh coriander."
+      },
+      {
+        "name": "Paneer Maggi",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "Masala noodles stir-fried with juicy sautéed paneer cubes, crunchy capsicum and special herbs."
+      },
+      {
+        "name": "Plain Maggi",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "Classic 2-minute canteen style noodles cooked in signature Maggi tastemaker broth."
+      },
+      {
+        "name": "Veg Maggi",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "Maggi noodles loaded with sweet green peas, diced carrots, capsicum, onions and sweet corn."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1562967914-608f82629710?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1562967914-608f82629710",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Chicken Nuggets (6 pcs)",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "Golden crispy chicken nuggets with a seasoned crumb. Served with dipping sauce."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1630384060421-cb20d0e0649d",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "French Fries",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "Golden crispy salted potato fingers served hot with tomato ketchup and garlic mayo dip."
+      },
+      {
+        "name": "Peri Peri Fries",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "Crisp hot fries tossed in an aromatic, zesty African peri peri spice blend."
+      },
+      {
+        "name": "Chilli Potato",
+        "category": "6acf906be91fbc23da108f4b",
+        "desc": "Crispy deep-fried potato batons tossed in a spicy, tangy Indo-Chinese chilli garlic sauce with spring onions."
+      },
+      {
+        "name": "Honey Chilli Potato",
+        "category": "6acf906be91fbc23da108f4b",
+        "desc": "Golden fried potato fingers coated in sweet honey glaze, toasted sesame seeds and spicy red chilli sauce."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1599487488170-d11ec9c172f0",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Fried Momos",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "6 golden crispy fried dumplings served with spicy garlic-tomato chutney and mayonnaise."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=600&q=80": {
+    "photoId": "1630384060421-cb20d0e0649d",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Masala Fries",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "Thick-cut fries tossed with chaat masala, lemon and coriander. Irresistibly addictive."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1586816001966-79b736744398?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1586816001966-79b736744398",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Paneer Burger",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "Spiced grilled paneer patty with chipotle dressing, onions, sliced tomato and crisp lettuce in a soft bun."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1616501268004-0b4ecac6c2b3?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1616501268004-0b4ecac6c2b3",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Spring Rolls",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "2 crispy fried golden rolls packed with shredded wok-tossed vegetables and glass noodles."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1606491956689-2ea866880c84",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Veg Cutlet",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "2 spiced mashed potato, beetroot and pea patties with a crispy breadcrumb coating, served with mint chutney."
+      },
+      {
+        "name": "Aloo Puri",
+        "category": "6acfa8a385bebae47dddff33",
+        "desc": "4 fluffy golden deep-fried puris served with spicy, tangy Delhi-style rasedaar aloo sabzi and pickle."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1534422298391-e4f8c172dddb",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Veg Momos",
+        "category": "6aca6be285bebae47ddb3849",
+        "desc": "6 delicate steamed dumplings stuffed with minced cabbage, carrot, ginger and spring onions, with fiery chilli dip."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1570696516188-ade861b84a49?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1570696516188-ade861b84a49",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Banana Shake",
+        "category": "6aca6be285bebae47ddb384a",
+        "desc": "Freshly blended ripe bananas with cold milk, honey and a pinch of fragrant cardamom."
+      },
+      {
+        "name": "Mango Shake",
+        "category": "6aca6be285bebae47ddb384a",
+        "desc": "Thick chilled mango milkshake prepared with real Alphonso mango pulp and creamy dairy milk."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1560023907-5f339617ea30?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1560023907-5f339617ea30",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Bottled Water",
+        "category": "6aca6be285bebae47ddb384a",
+        "desc": "1 Litre sealed packaged mineral drinking water bottle."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1553361371-9b22f78e8b1d",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Buttermilk",
+        "category": "6aca6be285bebae47ddb384a",
+        "desc": "Spiced salted chhaas tempered with roasted cumin, rock salt, ginger and fresh green coriander."
+      },
+      {
+        "name": "Lassi",
+        "category": "6aca6be285bebae47ddb384a",
+        "desc": "Traditional sweet thick Punjabi curd drink served chilled with a rich creamy layer on top."
+      },
+      {
+        "name": "Mango Lassi",
+        "category": "6aca6be285bebae47ddb384a",
+        "desc": "Thick, chilled yogurt drink blended with Alphonso mango pulp and a pinch of cardamom."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1572490122747-3968b75cc699",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Chocolate Shake",
+        "category": "6aca6be285bebae47ddb384a",
+        "desc": "Decadent thick shake blended with cocoa, rich chocolate syrup, milk and vanilla ice cream."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1514432324607-a09d9b4aefdd",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Coffee",
+        "category": "6aca6be285bebae47ddb384a",
+        "desc": "Hot frothy milk coffee prepared canteen-style with rich blended roasted chicory-coffee beans."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&q=80": {
+    "photoId": "1461023058943-07fcbe16d735",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Cold Coffee",
+        "category": "6aca6be285bebae47ddb384a",
+        "desc": "Strong cold brew blended with milk and vanilla ice cream. Rich, frothy and chilled."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1513558161293-cdaf765ed2fd",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Fresh Lime Soda",
+        "category": "6aca6be285bebae47ddb384a",
+        "desc": "Freshly squeezed lime juice with chilled sparkling soda, rock salt and sugar syrup (Sweet / Salt / Mixed)."
+      },
+      {
+        "name": "Lemon Water",
+        "category": "6aca6be285bebae47ddb384a",
+        "desc": "Classic chilled shikanji with freshly squeezed lime, roasted cumin, black salt and mint."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1542990253-0d0f5be5f0ed",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Hot Chocolate",
+        "category": "6aca6be285bebae47ddb384a",
+        "desc": "Rich, creamy warm milk cocoa drink topped with dark chocolate shavings."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1556679343-c7306c1976bc",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Iced Tea",
+        "category": "6aca6be285bebae47ddb384a",
+        "desc": "Refreshing chilled black tea infused with real lemon juice, fresh mint sprigs and cane sugar."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1544787219-7f47ccb76574",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Masala Chai",
+        "category": "6aca6be285bebae47ddb384a",
+        "desc": "Authentic college canteen milk tea freshly brewed with crushed ginger, green cardamom and black tea leaves."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1613478223719-2ab802602423?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1613478223719-2ab802602423",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Packaged Juice",
+        "category": "6aca6be285bebae47ddb384a",
+        "desc": "200ml tetra pack of chilled fruit juice (Mixed Fruit / Guava / Mango)."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1576092768241-dec231879fc3",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Regular Tea",
+        "category": "6aca6be285bebae47ddb384a",
+        "desc": "Classic Indian milk chai brewed with premium Assam tea leaves and sugar to taste."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1631452180519-c014fe946bc7",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Chilli Paneer",
+        "category": "6acf906be91fbc23da108f4b",
+        "desc": "Crispy batter-fried paneer cubes tossed with diced bell peppers, onions, green chillies and dark soya sauce."
+      },
+      {
+        "name": "Veg Manchurian",
+        "category": "6acf906be91fbc23da108f4b",
+        "desc": "Crispy fried vegetable dumplings tossed in savoury ginger, garlic, green coriander and soya gravy."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1603133872878-684f208fb84b",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Manchurian Fried Rice",
+        "category": "6acf906be91fbc23da108f4b",
+        "desc": "Savoury combination plate of vegetable fried rice served with crispy veg manchurian balls in rich gravy."
+      },
+      {
+        "name": "Schezwan Fried Rice",
+        "category": "6acf906be91fbc23da108f4b",
+        "desc": "Wok-tossed spicy fried rice coated in red chilli schezwan sauce with spring onion greens and vegetables."
+      },
+      {
+        "name": "Schezwan Noodles",
+        "category": "6acf906be91fbc23da108f4b",
+        "desc": "Fiery wok-fried noodles tossed in house-made spicy Sichuan chilli paste, garlic and crunchy vegetables."
+      },
+      {
+        "name": "Veg Fried Rice",
+        "category": "6acf906be91fbc23da108f4b",
+        "desc": "Fluffy long-grain rice wok-tossed with finely diced vegetables, garlic, pepper and dark soy seasoning."
+      },
+      {
+        "name": "Veg Hakka Noodles",
+        "category": "6acf906be91fbc23da108f4b",
+        "desc": "Wok-tossed noodles with shredded cabbage, crunchy capsicum, carrots, spring onions and dark soy sauce."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1506976785307-8732e854ad03",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Boiled Eggs",
+        "category": "6acfa8a385bebae47dddff33",
+        "desc": "2 fresh hard-boiled farm eggs sprinkled with black pepper, rock salt and chaat masala."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1549931319-a545dcf3bc7b?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1549931319-a545dcf3bc7b",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Bread Butter",
+        "category": "6acfa8a385bebae47dddff33",
+        "desc": "2 slices of fresh white bread spread generously with creamy salted Amul butter."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1525351484163-7529414344d8",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Bread Omelette",
+        "category": "6acfa8a385bebae47dddff33",
+        "desc": "Double egg fluffy spiced omelette seasoned with onions, chillies and coriander, wrapped between toasted bread."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1589301760014-d929f3979dbc",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Idli Sambhar",
+        "category": "6acfa8a385bebae47dddff33",
+        "desc": "3 soft, fluffy steamed rice-lentil cakes served with piping hot vegetable sambhar and fresh coconut chutney."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1668236543090-82eba5ee5976",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Masala Dosa",
+        "category": "6acfa8a385bebae47dddff33",
+        "desc": "Golden crispy fermented crepe filled with spiced potato masala, served with sambhar and coconut chutney."
+      },
+      {
+        "name": "Plain Dosa",
+        "category": "6acfa8a385bebae47dddff33",
+        "desc": "Crisp golden rice-lentil crepe cooked with fresh butter, served with lentil sambhar and coconut chutney."
+      },
+      {
+        "name": "Upma",
+        "category": "6acfa8a385bebae47dddff33",
+        "desc": "Traditional roasted semolina porridge tempered with ginger, mustard seeds, green chillies, cashews and curry leaves."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1610192244261-3f33de3f55e4",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Poha",
+        "category": "6acfa8a385bebae47dddff33",
+        "desc": "Light flattened rice tempered with mustard seeds, curry leaves, onions, crunchy roasted peanuts and lemon."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1619535860434-ba1d8fa12536?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1619535860434-ba1d8fa12536",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Cheese Garlic Bread",
+        "category": "6acfa8a485bebae47dddff34",
+        "desc": "Warm oven-toasted garlic bread smothered with melting mozzarella, chilli flakes and Italian oregano."
+      },
+      {
+        "name": "Garlic Bread",
+        "category": "6acfa8a485bebae47dddff34",
+        "desc": "3 slices of freshly toasted French baguette brushed with garlic herb butter and parsley."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1574071318508-1cdbab80d002",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Margherita Pizza",
+        "category": "6acfa8a485bebae47dddff34",
+        "desc": "7-inch personal pan pizza with San Marzano tomato herb sauce, extra-virgin olive oil and mozzarella cheese."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1621996346565-e3dbc646d9a9",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Red Sauce Pasta",
+        "category": "6acfa8a485bebae47dddff34",
+        "desc": "Penne pasta simmered in tangy, spicy arrabbiata tomato sauce with black olives and bell peppers."
+      },
+      {
+        "name": "Veg Pasta",
+        "category": "6acfa8a485bebae47dddff34",
+        "desc": "Penne pasta tossed with sautéed seasonal vegetables, garlic, herbs and a balanced house sauce."
+      },
+      {
+        "name": "White Sauce Pasta",
+        "category": "6acfa8a485bebae47dddff34",
+        "desc": "Creamy Italian penne pasta tossed in rich cheesy béchamel sauce with sweet corn, mushrooms and herbs."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1513104890138-7c749659a591",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Veggie Pizza",
+        "category": "6acfa8a485bebae47dddff34",
+        "desc": "7-inch pan pizza loaded with diced capsicum, red onion, sweet corn, sliced tomatoes and mozzarella."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1606313564200-e75d5e30476c",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Chocolate Brownie",
+        "category": "6acfa8a485bebae47dddff35",
+        "desc": "Warm fudge chocolate brownie loaded with walnut bits, drizzled with hot chocolate ganache."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1501443762994-82bd5dace89a",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Ice Cream",
+        "category": "6acfa8a485bebae47dddff35",
+        "desc": "Single scoop of rich creamy dairy ice cream (Choice of Vanilla, Rich Chocolate, or Butterscotch)."
+      }
+    ]
+  },
+  "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&auto=format&fit=crop&q=80": {
+    "photoId": "1578985545062-69928b1d9587",
+    "title": "Making sure you&#39;re not a bot!",
+    "items": [
+      {
+        "name": "Pastry",
+        "category": "6acfa8a485bebae47dddff35",
+        "desc": "Fresh slice of bakery cream pastry (Black Forest, Pineapple, or Dutch Chocolate)."
+      }
+    ]
+  }
+}
