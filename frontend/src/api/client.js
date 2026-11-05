@@ -74,6 +74,9 @@ export const apiVerifyPayment = (payload) =>
 export const apiCancelPayment = (payload) =>
   api.post('/payments/cancel', payload).then((r) => r.data);
 
+export const fetchPaymentStatus = (orderId) =>
+  api.get(`/payments/${orderId}/status`).then((r) => r.data.data);
+
 // ─── Admin API ────────────────────────────────────────────────────────────────
 // Food CRUD
 export const fetchAdminFoodItems = (params = {}) =>

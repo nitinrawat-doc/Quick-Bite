@@ -43,6 +43,15 @@ const cartReducer = (state, action) => {
     }
     case 'DELETE':
       return { ...state, items: state.items.filter((i) => i._id !== action.id) };
+    case 'CLEAR_ORDERED_ITEMS': {
+      if (!Array.isArray(action.itemIds) || action.itemIds.length === 0) {
+        return { ...state, items: [] };
+      }
+      return {
+        ...state,
+        items: state.items.filter((i) => !action.itemIds.includes(i._id)),
+      };
+    }
     case 'CLEAR':
       return { ...state, items: [] };
     case 'TOGGLE_DRAWER':
@@ -71,13 +80,14 @@ export function CartProvider({ children }) {
     }
   }, [state.items]);
 
-  const addItem    = useCallback((item) => dispatch({ type: 'ADD', item }), []);
-  const removeItem = useCallback((id)   => dispatch({ type: 'REMOVE', id }), []);
-  const deleteItem = useCallback((id)   => dispatch({ type: 'DELETE', id }), []);
-  const clearCart  = useCallback(()     => dispatch({ type: 'CLEAR' }), []);
-  const openCart   = useCallback(()     => dispatch({ type: 'OPEN_DRAWER' }), []);
-  const closeCart  = useCallback(()     => dispatch({ type: 'CLOSE_DRAWER' }), []);
-  const toggleCart = useCallback(()     => dispatch({ type: 'TOGGLE_DRAWER' }), []);
+  const addItem           = useCallback((item)    => dispatch({ type: 'ADD', item }), []);
+  const removeItem        = useCallback((id)      => dispatch({ type: 'REMOVE', id }), []);
+  const deleteItem        = useCallback((id)      => dispatch({ type: 'DELETE', id }), []);
+  const clearOrderedItems = useCallback((itemIds) => dispatch({ type: 'CLEAR_ORDERED_ITEMS', itemIds }), []);
+  const clearCart         = useCallback(()        => dispatch({ type: 'CLEAR' }), []);
+  const openCart          = useCallback(()        => dispatch({ type: 'OPEN_DRAWER' }), []);
+  const closeCart         = useCallback(()        => dispatch({ type: 'CLOSE_DRAWER' }), []);
+  const toggleCart        = useCallback(()        => dispatch({ type: 'TOGGLE_DRAWER' }), []);
 
   const totalItems = state.items.reduce((sum, i) => sum + i.qty, 0);
   const totalPrice = state.items.reduce(
@@ -95,6 +105,7 @@ export function CartProvider({ children }) {
         addItem,
         removeItem,
         deleteItem,
+        clearOrderedItems,
         clearCart,
         openCart,
         closeCart,

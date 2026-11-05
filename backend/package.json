@@ -12,7 +12,7 @@
     "batch-fix-images": "node src/scripts/batchFixFoodImages.js",
     "audit-images": "node src/scripts/auditFullCatalog.js",
     "setup:admin": "node src/scripts/provisionAdmin.js",
-    "test": "node tests/milestone2.test.js && node tests/milestone3.test.js && node tests/milestone4.test.js && node tests/milestoneAdmin.test.js"
+    "test": "node tests/milestone2.test.js && node tests/milestone3.test.js && node tests/milestone4.test.js && node tests/milestoneAdmin.test.js && node tests/razorpay.test.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
@@ -24,7 +24,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^9.11.1",
     "morgan": "^1.10.0",
-    "multer": "^2.4.0"
+    "multer": "^2.4.0",
+    "razorpay": "^2.9.8"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"

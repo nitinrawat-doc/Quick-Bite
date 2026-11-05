@@ -9,7 +9,16 @@ process.env.JWT_SECRET = 'test_secret_for_milestone_3_testing_123456';
 process.env.ADMIN_SETUP_TOKEN = 'test_admin_setup_token_xyz_2026';
 process.env.RAZORPAY_KEY_SECRET = 'test_razorpay_secret_key_2026';
 process.env.RAZORPAY_WEBHOOK_SECRET = 'test_razorpay_webhook_secret_2026';
-process.env.MONGODB_URI = 'mongodb://127.0.0.1:27017/quickbite_test_m3';
+require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') });
+const rawMongoUri = process.env.TEST_MONGODB_URI || process.env.MONGODB_URI;
+if (rawMongoUri && rawMongoUri.includes('mongodb')) {
+  const parts = rawMongoUri.split('?');
+  const base = parts[0].replace(/\/+$/, '');
+  const query = parts[1] ? `?${parts[1]}` : '';
+  process.env.MONGODB_URI = `${base}/quickbite_test_m3${query}`;
+} else {
+  process.env.MONGODB_URI = 'mongodb://127.0.0.1:27017/quickbite_test_m3';
+}
 
 const app = require('../server');
 const User = require('../src/models/User');

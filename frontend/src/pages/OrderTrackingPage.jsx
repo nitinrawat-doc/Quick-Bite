@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { fetchOrderDetails, apiCancelOrder } from '../api/client';
+import { fetchOrderDetails, apiCancelOrder, fetchPaymentStatus } from '../api/client';
 import Navbar from '../components/layout/Navbar';
 import BottomNav from '../components/layout/BottomNav';
 import FoodImage from '../components/common/FoodImage';
@@ -42,6 +42,17 @@ export default function OrderTrackingPage() {
       try {
         if (!isPolling) setLoading(true);
         const data = await fetchOrderDetails(id);
+        if (data && data.paymentMethod === 'razorpay' && data.paymentStatus === 'pending') {
+          try {
+            const payStatus = await fetchPaymentStatus(id);
+            if (payStatus && payStatus.paymentStatus === 'completed') {
+              data.paymentStatus = 'completed';
+              data.orderStatus = payStatus.orderStatus || 'confirmed';
+            }
+          } catch {
+            // Background sync check
+          }
+        }
         setOrder(data);
         setError(null);
       } catch (err) {
@@ -452,16 +463,29 @@ export default function OrderTrackingPage() {
               <div style={{ borderTop: '1px solid #2E333B', paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem', color: '#8B9099' }}>
                   <span>Payment Method</span>
-                  <span style={{ color: '#F5F5F5', fontWeight: 600, textTransform: 'capitalize' }}>
-                    {order.paymentMethod.replace(/_/g, ' ')}
+                  <span style={{ color: '#F5F5F5', fontWeight: 600 }}>
+                    {order.paymentMethod === 'razorpay' ? 'Razorpay Online Gateway' : 'Pay at Counter (Cash / UPI)'}
                   </span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem', color: '#8B9099' }}>
                   <span>Payment Status</span>
-                  <span style={{ color: order.paymentStatus === 'completed' ? '#4CAF7D' : '#F5C542', fontWeight: 600, textTransform: 'capitalize' }}>
-                    {order.paymentStatus} (Pay at counter)
+                  <span style={{
+                    color: order.paymentStatus === 'completed' ? '#4CAF7D' : order.paymentStatus === 'failed' ? '#E05252' : '#F5C542',
+                    fontWeight: 600,
+                  }}>
+                    {order.paymentStatus === 'completed'
+                      ? (order.paymentMethod === 'razorpay' ? 'Paid Online' : 'Paid at Counter')
+                      : order.paymentStatus === 'failed'
+                      ? 'Payment Failed'
+                      : (order.paymentMethod === 'razorpay' ? 'Payment Pending' : 'Pay at Counter')}
                   </span>
                 </div>
+                {order.razorpayPaymentId && (
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8125rem', color: '#8B9099' }}>
+                    <span>Razorpay Reference</span>
+                    <span style={{ color: '#8B9EFF', fontFamily: 'monospace' }}>{order.razorpayPaymentId}</span>
+                  </div>
+                )}
                 {order.specialInstructions && (
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem', color: '#8B9099' }}>
                     <span>Special Notes</span>

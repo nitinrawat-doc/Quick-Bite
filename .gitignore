@@ -6,3 +6,5 @@ dist/
 *.log
 .DS_Store
 backend/scratch/
+.mongo_data/
+backend/.mongo_test_data/

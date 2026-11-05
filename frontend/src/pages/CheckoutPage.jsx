@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
@@ -26,7 +26,7 @@ import {
 import toast from 'react-hot-toast';
 
 export default function CheckoutPage() {
-  const { items, totalPrice, totalItems, clearCart } = useCart();
+  const { items, totalPrice, totalItems, clearOrderedItems, clearCart } = useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -34,6 +34,9 @@ export default function CheckoutPage() {
   const [specialInstructions, setSpecialInstructions] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  // Tracks in-flight unverified online order to prevent duplicate stock reservations
+  const pendingOrderRef = useRef(null);
 
   // Sandbox modal state when placeholder keys are used
   const [sandboxModal, setSandboxModal] = useState(null);
@@ -84,6 +87,7 @@ export default function CheckoutPage() {
 
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
+    if (loading) return; // Prevent double-clicks and concurrent submissions
     setLoading(true);
     setError(null);
 
@@ -97,21 +101,53 @@ export default function CheckoutPage() {
         specialInstructions,
       };
 
-      // 1. Create order and reserve inventory
-      const orderRes = await apiCreateOrder(orderPayload);
-      const order = orderRes.data;
-
-      // 2. Flow: Pay at Pickup Counter
+      // Flow: Pay at Pickup Counter
       if (paymentMethod === 'pay_at_pickup') {
-        clearCart();
+        // Clean up any stale unpaid online order from previous attempt to restore its inventory
+        if (pendingOrderRef.current) {
+          try {
+            await apiCancelPayment({
+              orderId: pendingOrderRef.current._id,
+              reason: 'Switched to pay at pickup counter',
+            });
+          } catch {
+            // Ignore if already cancelled or cleaned up
+          }
+          pendingOrderRef.current = null;
+        }
+
+        const orderRes = await apiCreateOrder(orderPayload);
+        const order = orderRes.data;
+
+        // Clear only the ordered items belonging to this completed pickup order
+        clearOrderedItems(items.map((i) => i._id));
         toast.success('Order placed successfully! Pickup token generated. 🚀');
         navigate(`/orders/${order._id}`);
         return;
       }
 
-      // 3. Flow: Razorpay Online Payment
+      // Flow: Razorpay Online Payment
       if (paymentMethod === 'razorpay') {
-        // Initialize payment on backend
+        // If a previous uncompleted payment order exists from this session, cancel it first
+        // so its stock reservation is released before creating a fresh order on retry.
+        if (pendingOrderRef.current) {
+          try {
+            await apiCancelPayment({
+              orderId: pendingOrderRef.current._id,
+              reason: 'Superseded by new payment attempt',
+            });
+          } catch {
+            // Ignore if already cancelled
+          }
+          pendingOrderRef.current = null;
+        }
+
+        // 1. Create order on backend (reserves stock for this payment session)
+        const orderRes = await apiCreateOrder(orderPayload);
+        const order = orderRes.data;
+        pendingOrderRef.current = order;
+
+        // 2. Initialize payment with Razorpay on backend
         const paymentData = await apiCreatePaymentOrder(order._id);
 
         const isRealKey =
@@ -120,8 +156,8 @@ export default function CheckoutPage() {
           paymentData.keyId.startsWith('rzp_');
 
         if (!isRealKey) {
-          // Placeholder sandbox keys in .env
-          clearCart();
+          // In Sandbox / Test simulation mode:
+          // NEVER clear cart here! Keep cart items preserved in state and localStorage.
           setSandboxModal({
             order,
             paymentData,
@@ -130,11 +166,14 @@ export default function CheckoutPage() {
           return;
         }
 
-        // Real Razorpay test/production credentials detected
+        // 3. Real Razorpay test/production credentials detected
         const scriptLoaded = await loadRazorpayScript();
         if (!scriptLoaded) {
           throw new Error('Failed to load Razorpay SDK. Please check your internet connection.');
         }
+
+        const rawContact = (user?.phone || '').replace(/\D/g, '');
+        const validContact = rawContact.length >= 10 ? rawContact.slice(-10) : '9999999999';
 
         const options = {
           key: paymentData.keyId,
@@ -144,43 +183,115 @@ export default function CheckoutPage() {
           description: `Order #${paymentData.orderNumber}`,
           order_id: paymentData.razorpayOrderId,
           prefill: {
-            name: user?.name,
-            email: user?.email,
-            contact: user?.phone || '',
+            name: user?.name || '',
+            email: user?.email || '',
+            contact: validContact,
+          },
+          config: {
+            display: {
+              blocks: {
+                upi: {
+                  name: 'Pay via UPI / QR',
+                  instruments: [
+                    {
+                      method: 'upi',
+                      flows: ['intent', 'qr'],
+                      apps: ['google_pay', 'phonepe', 'paytm', 'bhim'],
+                    },
+                  ],
+                },
+                other: {
+                  name: 'Cards, NetBanking & Wallets',
+                  instruments: [
+                    {
+                      method: 'card',
+                    },
+                    {
+                      method: 'netbanking',
+                    },
+                    {
+                      method: 'wallet',
+                    },
+                  ],
+                },
+              },
+              sequence: ['block.upi', 'block.other'],
+              preferences: {
+                show_default_blocks: true,
+              },
+            },
           },
           theme: { color: '#F28C45' },
           handler: async function (response) {
             try {
               setLoading(true);
-              await apiVerifyPayment({
+              // Submit returned signature and payment id to backend for verification.
+              // The backend fetches the real payment method (upi/card/netbanking)
+              // from Razorpay API — no need to hardcode method here.
+              const verifyRes = await apiVerifyPayment({
                 orderId: order._id,
                 razorpayOrderId: response.razorpay_order_id,
                 razorpayPaymentId: response.razorpay_payment_id,
                 razorpaySignature: response.razorpay_signature,
                 expectedAmount: paymentData.amount,
               });
-              clearCart();
-              toast.success('Payment verified successfully! 🎉');
-              navigate(`/orders/${order._id}`);
+
+              if (verifyRes.success && verifyRes.data?.paymentStatus === 'completed') {
+                // Clear cart ONLY AFTER verified backend confirmation!
+                clearOrderedItems(items.map((i) => i._id));
+                pendingOrderRef.current = null;
+                toast.success('Payment verified successfully! 🎉');
+                navigate(`/orders/${order._id}`);
+              } else {
+                throw new Error(verifyRes.message || 'Payment verification could not be confirmed.');
+              }
             } catch (err) {
+              // On verification failure, cart is NEVER cleared!
               toast.error(err.message || 'Payment signature verification failed.');
-              navigate(`/orders/${order._id}`);
+              setError(err.message || 'Payment verification failed. Your cart has been preserved.');
             } finally {
               setLoading(false);
             }
           },
           modal: {
-            ondismiss: function () {
-              toast('Payment cancelled or dismissed.');
-              clearCart();
-              navigate(`/orders/${order._id}`);
+            ondismiss: async function () {
+              // User dismissed or closed the checkout popup without paying
+              // DO NOT CLEAR CART! User remains on CheckoutPage with cart intact.
+              setLoading(false);
+              toast('Payment checkout closed. Your cart has been preserved.');
+              // Cancel pending reservation so inventory is freed up for retry
+              if (pendingOrderRef.current) {
+                try {
+                  await apiCancelPayment({
+                    orderId: order._id,
+                    reason: 'Payment dismissed by student',
+                  });
+                  pendingOrderRef.current = null;
+                } catch {
+                  // Keep reference if cancel failed
+                }
+              }
             },
           },
         };
 
         const rzp = new window.Razorpay(options);
-        rzp.on('payment.failed', function (response) {
-          toast.error(`Payment failed: ${response.error?.description || 'Transaction declined'}`);
+        rzp.on('payment.failed', async function (response) {
+          // Payment failed:
+          // DO NOT CLEAR CART!
+          setLoading(false);
+          toast.error(`Payment failed: ${response.error?.description || 'Transaction declined'}. Your cart is preserved.`);
+          if (pendingOrderRef.current) {
+            try {
+              await apiCancelPayment({
+                orderId: order._id,
+                reason: `Payment failed: ${response.error?.description || 'Declined'}`,
+              });
+              pendingOrderRef.current = null;
+            } catch {
+              // Keep reference if cancel failed
+            }
+          }
         });
         rzp.open();
       }
@@ -199,9 +310,10 @@ export default function CheckoutPage() {
         orderId: sandboxModal.order._id,
         reason: 'Payment cancelled during sandbox checkout.',
       });
-      toast.success('Order cancelled and inventory restored.');
+      toast.success('Payment cancelled & inventory restored. Your cart is preserved.');
       setSandboxModal(null);
-      navigate('/orders');
+      pendingOrderRef.current = null;
+      // User stays on CheckoutPage with cart intact
     } catch (err) {
       toast.error(err.message || 'Failed to cancel order.');
     }
@@ -386,10 +498,22 @@ export default function CheckoutPage() {
                     style={{ accentColor: '#F28C45', marginTop: 3 }}
                   />
                   <div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
                       <label htmlFor="pay-razorpay" style={{ fontWeight: 700, color: '#F5F5F5', fontSize: '0.9375rem', display: 'block', cursor: 'pointer' }}>
-                        Razorpay Online Gateway (UPI / Cards / NetBanking)
+                        Razorpay Online (UPI, Cards & NetBanking)
                       </label>
+                      <span
+                        style={{
+                          background: 'rgba(242,140,69,0.15)',
+                          color: '#F28C45',
+                          fontSize: '0.6875rem',
+                          fontWeight: 700,
+                          padding: '2px 6px',
+                          borderRadius: 6,
+                        }}
+                      >
+                        UPI / QR Enabled
+                      </span>
                       <span
                         style={{
                           background: '#4CAF7D18',
@@ -400,11 +524,11 @@ export default function CheckoutPage() {
                           borderRadius: 6,
                         }}
                       >
-                        Sandbox / Live
+                        Secure Gateway
                       </span>
                     </div>
                     <p style={{ margin: '4px 0 0', fontSize: '0.8125rem', color: '#8B9099', lineHeight: 1.4 }}>
-                      Pay instantly online using Razorpay payment gateway with server-side HMAC-SHA256 signature verification.
+                      Instant payment via UPI Apps (Google Pay, PhonePe, Paytm), Dynamic QR Code, Credit/Debit Cards, and NetBanking with HMAC-SHA256 verification.
                     </p>
                   </div>
                 </div>
@@ -589,7 +713,7 @@ export default function CheckoutPage() {
               External credentials (<code style={{ color: '#8B9EFF' }}>RAZORPAY_KEY_ID</code> and <code style={{ color: '#8B9EFF' }}>RAZORPAY_KEY_SECRET</code>) can be placed in <code style={{ color: '#8B9EFF' }}>backend/.env</code> for live checkout popup testing. In sandbox mode, automated backend test suites verify HMAC-SHA256 signatures and amount matching.
             </div>
 
-            <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+            <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
               <button
                 onClick={handleCancelSandboxOrder}
                 style={{
@@ -606,8 +730,51 @@ export default function CheckoutPage() {
                 Cancel & Release Stock
               </button>
               <button
+                onClick={async () => {
+                  try {
+                    setLoading(true);
+                    const verifyRes = await apiVerifyPayment({
+                      orderId: sandboxModal.order._id,
+                      razorpayOrderId: sandboxModal.paymentData.razorpayOrderId,
+                      razorpayPaymentId: `pay_sandbox_${Date.now()}`,
+                      razorpaySignature: 'test_valid_signature',
+                      expectedAmount: sandboxModal.paymentData.amount,
+                    });
+
+                    if (verifyRes.success && verifyRes.data?.paymentStatus === 'completed') {
+                      // Clear only the ordered items after verified server confirmation
+                      clearOrderedItems(items.map((i) => i._id));
+                      pendingOrderRef.current = null;
+                      toast.success('Sandbox payment verified & order confirmed! 🎉');
+                      const targetId = sandboxModal.order._id;
+                      setSandboxModal(null);
+                      navigate(`/orders/${targetId}`);
+                    } else {
+                      throw new Error(verifyRes.message || 'Payment verification failed');
+                    }
+                  } catch (err) {
+                    toast.error(err.message || 'Verification failed');
+                  } finally {
+                    setLoading(false);
+                  }
+                }}
+                style={{
+                  background: 'rgba(76, 175, 125, 0.15)',
+                  border: '1px solid #4CAF7D',
+                  color: '#4CAF7D',
+                  padding: '8px 14px',
+                  borderRadius: 10,
+                  fontSize: '0.875rem',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                }}
+              >
+                Simulate Payment Success
+              </button>
+              <button
                 onClick={() => {
                   const oid = sandboxModal.order._id;
+                  pendingOrderRef.current = null;
                   setSandboxModal(null);
                   navigate(`/orders/${oid}`);
                 }}
@@ -620,7 +787,7 @@ export default function CheckoutPage() {
                   cursor: 'pointer',
                 }}
               >
-                Track Order
+                Track Unpaid Order
               </button>
             </div>
           </div>
