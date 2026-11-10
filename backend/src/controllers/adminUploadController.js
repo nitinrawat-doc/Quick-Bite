@@ -2,23 +2,18 @@ const path = require('path');
 const fs = require('fs');
 const multer = require('multer');
 
-// Ensure uploads folder exists
-const uploadDir = path.join(__dirname, '../../uploads');
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
+// ─── Multer Storage Strategy ──────────────────────────────────────────────────
+// On Vercel (and any serverless / read-only filesystem environment) disk storage
+// is not available. We use memoryStorage so the file lands in req.file.buffer
+// and is piped directly to Cloudinary without touching the filesystem.
+// In local development with Cloudinary configured, the same path is used.
+// Local disk fallback is preserved only for local dev without Cloudinary.
 
-// Multer disk storage for local uploads
-const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => {
-    cb(null, uploadDir);
-  },
-  filename: (_req, file, cb) => {
-    const ext = path.extname(file.originalname).toLowerCase();
-    const unique = `${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`;
-    cb(null, unique);
-  },
-});
+const isServerless = process.env.VERCEL === '1';
+
+// Always use memory storage — avoids filesystem writes entirely and works in
+// both serverless and traditional environments.
+const storage = multer.memoryStorage();
 
 const fileFilter = (_req, file, cb) => {
   const allowedMime = ['image/jpeg', 'image/png', 'image/webp'];
@@ -56,7 +51,7 @@ const handleImageUpload = async (req, res, next) => {
     const apiKey = process.env.CLOUDINARY_API_KEY;
     const apiSecret = process.env.CLOUDINARY_API_SECRET;
 
-    // If Cloudinary is configured, upload to Cloudinary
+    // ── Cloudinary upload path (production + local with Cloudinary configured) ──
     if (cloudName && apiKey && apiSecret) {
       try {
         const cloudinary = require('cloudinary').v2;
@@ -64,38 +59,73 @@ const handleImageUpload = async (req, res, next) => {
           cloud_name: cloudName,
           api_key: apiKey,
           api_secret: apiSecret,
+          secure: true,
         });
 
-        const result = await cloudinary.uploader.upload(req.file.path, {
-          folder: 'quickbite/food',
-          resource_type: 'image',
+        // Upload from buffer using upload_stream (no temp file needed)
+        const uploadResult = await new Promise((resolve, reject) => {
+          const stream = cloudinary.uploader.upload_stream(
+            {
+              folder: 'quickbite/food',
+              resource_type: 'image',
+            },
+            (error, result) => {
+              if (error) return reject(error);
+              resolve(result);
+            }
+          );
+          stream.end(req.file.buffer);
         });
-
-        // Clean up local temp file
-        fs.unlink(req.file.path, () => {});
 
         return res.json({
           success: true,
           message: 'Image uploaded successfully to Cloudinary.',
-          url: result.secure_url,
-          publicId: result.public_id,
+          url: uploadResult.secure_url,
+          publicId: uploadResult.public_id,
         });
       } catch (cloudErr) {
+        // On Vercel there is no local fallback — surface the error clearly
+        if (isServerless) {
+          console.error('Cloudinary upload failed on serverless:', cloudErr.message);
+          return res.status(502).json({
+            success: false,
+            message: `Image upload failed: ${cloudErr.message}. Cloudinary must be configured in production.`,
+          });
+        }
         console.warn('Cloudinary upload failed, falling back to local storage:', cloudErr.message);
       }
     }
 
-    // Default: serve uploaded image via static URL
-    const localUrl = `/uploads/${req.file.filename}`;
+    // ── Local disk fallback (local development without Cloudinary only) ────────
+    if (isServerless) {
+      // This path should never be reached on Vercel since the block above returns.
+      // Guard here as a safety net.
+      return res.status(503).json({
+        success: false,
+        message: 'Image upload requires Cloudinary configuration in production. Set CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET.',
+      });
+    }
+
+    // Write buffer to local disk for development
+    const uploadDir = path.join(__dirname, '../../uploads');
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+    const ext = path.extname(req.file.originalname).toLowerCase();
+    const filename = `${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`;
+    const filePath = path.join(uploadDir, filename);
+    fs.writeFileSync(filePath, req.file.buffer);
+
+    const localUrl = `/uploads/${filename}`;
     const baseUrl = (process.env.BACKEND_URL || `${req.protocol}://${req.get('host')}`).replace(/\/$/, '');
     const absoluteUrl = `${baseUrl}${localUrl}`;
 
     res.json({
       success: true,
-      message: 'Image uploaded successfully.',
+      message: 'Image uploaded successfully (local dev).',
       url: localUrl,
       absoluteUrl,
-      filename: req.file.filename,
+      filename,
     });
   } catch (err) {
     next(err);
