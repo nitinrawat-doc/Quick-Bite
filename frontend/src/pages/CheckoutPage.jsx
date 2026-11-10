@@ -190,6 +190,9 @@ export default function CheckoutPage() {
           config: {
             display: {
               blocks: {
+                // UPI Intent + QR block — must be show_default_blocks: false when using
+                // custom blocks, otherwise Razorpay's renderer conflicts with the custom
+                // block's instrument availability check and greys out UPI Intent.
                 upi: {
                   name: 'Pay via UPI / QR',
                   instruments: [
@@ -200,24 +203,23 @@ export default function CheckoutPage() {
                     },
                   ],
                 },
+                // Explicit block for Cards, NetBanking and Wallets
+                // Required when show_default_blocks: false so these methods remain visible
                 other: {
                   name: 'Cards, NetBanking & Wallets',
                   instruments: [
-                    {
-                      method: 'card',
-                    },
-                    {
-                      method: 'netbanking',
-                    },
-                    {
-                      method: 'wallet',
-                    },
+                    { method: 'card' },
+                    { method: 'netbanking' },
+                    { method: 'wallet' },
                   ],
                 },
               },
               sequence: ['block.upi', 'block.other'],
               preferences: {
-                show_default_blocks: true,
+                // MUST be false when custom blocks are defined.
+                // show_default_blocks: true causes a renderer collision that greys
+                // out UPI Intent/QR on custom blocks (Razorpay SDK known behaviour).
+                show_default_blocks: false,
               },
             },
           },

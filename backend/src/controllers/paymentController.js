@@ -139,16 +139,22 @@ const createPaymentOrder = async (req, res, next) => {
     await Payment.findOneAndUpdate(
       { order: order._id },
       {
-        razorpayOrderId,
-        paymentMethod: 'razorpay',
-        paymentStatus: 'pending',
-        amount: order.totalAmount,
-        currency: 'INR',
+        $set: {
+          razorpayOrderId,
+          paymentMethod: 'razorpay',
+          paymentStatus: 'pending',
+          amount: order.totalAmount,
+          currency: 'INR',
+        },
+        // Ensure user is set on insert (upsert safety — user is required by schema)
+        $setOnInsert: {
+          user: order.user,
+        },
       },
       { upsert: true, returnDocument: 'after' }
     );
 
-    // Security: Never return keySecret to frontend or logs
+    // Security: Never return keySecret, isConfigured, or isSandbox to frontend
     res.json({
       success: true,
       data: {
@@ -164,11 +170,6 @@ const createPaymentOrder = async (req, res, next) => {
           email: req.user.email,
           phone: req.user.phone || '',
         },
-        isConfigured: credentials.isConfigured,
-        isSandbox: credentials.isSandbox,
-        note: credentials.isConfigured
-          ? 'Live/Test Razorpay checkout order created.'
-          : 'Razorpay Sandbox Mode: Simulated gateway checkout order created.',
       },
     });
   } catch (err) {
