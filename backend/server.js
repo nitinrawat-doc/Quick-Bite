@@ -25,7 +25,9 @@ const mongoose = require('mongoose');
 const isServerless = process.env.VERCEL === '1';
 
 if (!isServerless && process.env.NODE_ENV !== 'test') {
-  connectDB();
+  connectDB().catch((err) => {
+    console.warn(`⚠️ Initial MongoDB connection delayed: ${err.message}. Backend will retry on incoming requests.`);
+  });
 }
 
 // ─── Core Middleware ──────────────────────────────────────────────────────────

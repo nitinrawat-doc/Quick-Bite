@@ -1,0 +1,91 @@
+# ──────────────────────────────────────────────────────────────────────────────
+# QuickBite Full-Stack MERN — Docker Compose Orchestration
+# ──────────────────────────────────────────────────────────────────────────────
+# Services:
+#   1. backend  - Node.js Express API connecting to MongoDB Atlas
+#   2. frontend - React Vite Single Page Application served via Nginx reverse-proxy
+#
+# Note: MongoDB is hosted on MongoDB Atlas (cloud). No local database container
+# is created. Ensure your Atlas cluster allows connections from your IP (or 0.0.0.0/0).
+# ──────────────────────────────────────────────────────────────────────────────
+
+name: quickbite
+
+services:
+  # ─── Express Backend Service ────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: quickbite-backend
+    restart: unless-stopped
+    ports:
+      - "${BACKEND_PORT:-5000}:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - MONGODB_URI=${MONGODB_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRES_IN=${JWT_EXPIRES_IN:-7d}
+      - ADMIN_SETUP_SECRET=${ADMIN_SETUP_SECRET}
+      - RAZORPAY_KEY_ID=${RAZORPAY_KEY_ID:-}
+      - RAZORPAY_KEY_SECRET=${RAZORPAY_KEY_SECRET:-}
+      - RAZORPAY_WEBHOOK_SECRET=${RAZORPAY_WEBHOOK_SECRET:-}
+      - CLOUDINARY_CLOUD_NAME=${CLOUDINARY_CLOUD_NAME:-}
+      - CLOUDINARY_API_KEY=${CLOUDINARY_API_KEY:-}
+      - CLOUDINARY_API_SECRET=${CLOUDINARY_API_SECRET:-}
+      - CLIENT_URL=${CLIENT_URL:-http://localhost:5173,http://localhost:80,http://localhost:3000,http://localhost,http://127.0.0.1:5173,http://127.0.0.1:80}
+    env_file:
+      - path: ./.env
+        required: false
+      - path: ./backend/.env
+        required: false
+    volumes:
+      # Persistent volume for local uploaded dish photos (when Cloudinary is unset)
+      - backend-uploads:/app/uploads
+    networks:
+      - quickbite-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:5000/api/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+  # ─── React Frontend Service (Nginx) ─────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        # Default to relative /api so requests go through Nginx reverse proxy
+        - VITE_API_URL=${VITE_API_URL:-}
+        - VITE_RAZORPAY_KEY_ID=${VITE_RAZORPAY_KEY_ID:-}
+    container_name: quickbite-frontend
+    restart: unless-stopped
+    ports:
+      - "${FRONTEND_PORT:-5173}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - quickbite-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/nginx-health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+# ─── Persistent Storage ───────────────────────────────────────────────────────
+volumes:
+  backend-uploads:
+    name: quickbite_backend_uploads
+    driver: local
+
+# ─── Internal Network ─────────────────────────────────────────────────────────
+networks:
+  quickbite-network:
+    name: quickbite_network
+    driver: bridge
+

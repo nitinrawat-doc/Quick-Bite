@@ -1,0 +1,15 @@
+node_modules
+uploads/*
+!uploads/.gitkeep
+scratch
+tests
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+.git
+.github
+.mongo_data
+.mongo_test_data
+
